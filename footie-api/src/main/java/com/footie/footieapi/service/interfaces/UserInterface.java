@@ -4,5 +4,5 @@ import com.footie.footieapi.model.User;
 
 public interface UserInterface {
 
-    User addUser(User newUser);
+    void addUser(User newUser) throws Exception;
 }

@@ -12,8 +12,18 @@ public class UserService implements UserInterface{
     @Autowired
     private UserRepository userRepository;
 
-    public User addUser(User newUser){
+    private User user = null;
+
+    public void addUser(User newUser) throws Exception {
+        if(user != null){
+            throw new Exception("Already signed in");
+        }
+        if(userRepository.findByUsername(newUser.username) != null) {
+            throw new Exception("Username taken");
+        }
+        if(userRepository.findByEmail(newUser.email) != null){
+            throw new Exception("Email taken");
+        }
         userRepository.save(newUser);
-        return newUser;
-    }
+     }
 }
