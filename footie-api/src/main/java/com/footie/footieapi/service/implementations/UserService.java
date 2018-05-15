@@ -26,4 +26,20 @@ public class UserService implements UserInterface{
         }
         userRepository.save(newUser);
      }
+
+     public User loginUser(String username, String password) throws Exception {
+        System.out.println(user);
+        if(user != null){
+            throw new Exception("Already signed in");
+        }
+        user = userRepository.findByUsername(username);
+        if(user == null){
+            throw  new Exception("Username not found");
+        }
+        if(!user.password.equals(password)){
+            user = null;
+            throw  new Exception("Wrong password");
+        }
+        return user;
+     }
 }

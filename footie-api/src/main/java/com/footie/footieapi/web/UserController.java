@@ -6,14 +6,13 @@ import com.footie.footieapi.persistence.UserRepository;
 import com.footie.footieapi.service.implementations.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RestController(value = "/users")
+@RestController
 public class UserController {
 
     @Autowired
@@ -33,10 +32,21 @@ public class UserController {
         return users;
     }
 
-    @PostMapping(consumes = MediaType.ALL_VALUE, produces = "application/json")
+    @PostMapping(value="/users/register", consumes = MediaType.ALL_VALUE, produces = "application/json")
     public <T> T addUser(@RequestBody User user) {
         try {
             this.userService.addUser(user);
+        } catch (Exception ex){
+            return (T) ex.getMessage();
+        }
+        return (T) user;
+    }
+
+    @PostMapping(value="/users/login", consumes = MediaType.ALL_VALUE, produces = "application/json")
+    public <T> T loginUser(@RequestBody String[] response){
+        User user;
+        try{
+            user = this.userService.loginUser(response[0], response[1]);
         } catch (Exception ex){
             return (T) ex.getMessage();
         }
