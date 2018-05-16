@@ -28,7 +28,6 @@ public class UserService implements UserInterface{
      }
 
      public User loginUser(String username, String password) throws Exception {
-        System.out.println(user);
         if(user != null){
             throw new Exception("Already signed in");
         }
@@ -42,4 +41,19 @@ public class UserService implements UserInterface{
         }
         return user;
      }
+
+    public User getUser() throws Exception {
+        if(this.user == null){
+            throw new Exception("Not signed in");
+        }
+        return this.user;
+    }
+
+    public boolean logoutUser() throws Exception {
+        if(this.user == null){
+            throw new Exception("Not signed in");
+        }
+        this.user = null;
+        return true;
+    }
 }

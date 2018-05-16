@@ -16,23 +16,9 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public List<User> findAll() {
-        List<User> users = new ArrayList<>();
-        try {
-            users = (List<User>) userRepository.findAll();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        return users;
-    }
-
-    @PostMapping(value="/users/register", consumes = MediaType.ALL_VALUE, produces = "application/json")
+    @PostMapping(value="/user/register", consumes = MediaType.ALL_VALUE, produces = "application/json")
     public <T> T addUser(@RequestBody User user) {
         try {
             this.userService.addUser(user);
@@ -42,7 +28,7 @@ public class UserController {
         return (T) user;
     }
 
-    @PostMapping(value="/users/login", consumes = MediaType.ALL_VALUE, produces = "application/json")
+    @PostMapping(value="/user/login", consumes = MediaType.ALL_VALUE, produces = "application/json")
     public <T> T loginUser(@RequestBody String[] response){
         User user;
         try{
@@ -51,5 +37,27 @@ public class UserController {
             return (T) ex.getMessage();
         }
         return (T) user;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/user", produces = "application/json")
+    public <T> T getUser(){
+        User user;
+        try{
+            user = this.userService.getUser();
+        } catch (Exception ex) {
+            return (T) ex.getMessage();
+        }
+        return (T) user;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/user/logout", produces = "application/json")
+    public <T> T logoutUser(){
+        Boolean success;
+        try{
+            success =  this.userService.logoutUser();
+        } catch (Exception ex) {
+            return (T) ex.getMessage();
+        }
+        return (T) success;
     }
 }

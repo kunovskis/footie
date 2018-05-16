@@ -7,4 +7,8 @@ public interface UserInterface {
     void addUser(User newUser) throws Exception;
 
     User loginUser(String username, String password) throws Exception;
+
+    User getUser() throws Exception;
+
+    boolean logoutUser() throws Exception;
 }
