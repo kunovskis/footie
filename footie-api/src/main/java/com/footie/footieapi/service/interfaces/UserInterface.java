@@ -11,4 +11,6 @@ public interface UserInterface {
     User getUser() throws Exception;
 
     boolean logoutUser() throws Exception;
+
+    User updateUserWithTeam() throws Exception;
 }

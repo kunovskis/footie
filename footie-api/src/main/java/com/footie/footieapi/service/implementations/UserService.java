@@ -56,4 +56,13 @@ public class UserService implements UserInterface{
         this.user = null;
         return true;
     }
+
+    public User updateUserWithTeam() throws Exception {
+        if(user == null){
+            throw new Exception("Not signed in");
+        }
+        this.user.hasTeam = true;
+        this.userRepository.save(user);
+        return user;
+    }
 }

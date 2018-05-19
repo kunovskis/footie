@@ -27,6 +27,15 @@ public class User {
     @Column(name = "dollars")
     public int dollars = 100;
 
+    @Column(name = "energy")
+    public int energy = 10;
+
+    @Column(name = "max_energy")
+    public int maxEnergy = 10;
+
+    @Column(name = "has_team")
+    public boolean hasTeam = false;
+
     public User(){
 
     }

@@ -60,4 +60,15 @@ public class UserController {
         }
         return (T) success;
     }
+
+    @PostMapping(value="/user/has-team", consumes = MediaType.ALL_VALUE, produces = "application/json")
+    public <T> T updateUserWithTeam(@RequestBody String response){
+        User user;
+        try{
+            user = this.userService.updateUserWithTeam();
+        } catch (Exception ex) {
+            return (T) ex.getMessage();
+        }
+        return (T) user;
+    }
 }
