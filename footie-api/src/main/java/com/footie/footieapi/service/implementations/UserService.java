@@ -65,4 +65,13 @@ public class UserService implements UserInterface{
         this.userRepository.save(user);
         return user;
     }
+
+    public User addCoins(int coins) throws Exception{
+        if(user == null){
+            throw new Exception("Not signed in");
+        }
+        this.user.coins += coins;
+        this.userRepository.save(user);
+        return user;
+    }
 }

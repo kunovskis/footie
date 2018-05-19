@@ -13,4 +13,6 @@ public interface UserInterface {
     boolean logoutUser() throws Exception;
 
     User updateUserWithTeam() throws Exception;
+
+    User addCoins(int coins) throws Exception;
 }

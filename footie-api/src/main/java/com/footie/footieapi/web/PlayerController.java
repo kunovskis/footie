@@ -5,10 +5,7 @@ import com.footie.footieapi.model.User;
 import com.footie.footieapi.service.implementations.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -25,5 +22,10 @@ public class PlayerController {
             return (T) ex.getMessage();
         }
         return (T) player;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/player/team", produces = "application/json")
+    public <T> T getTeam() throws Exception {
+        return (T) this.playerService.getTeam();
     }
 }
