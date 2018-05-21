@@ -1,5 +1,7 @@
 package com.footie.footieapi.model;
 
+import org.springframework.core.annotation.Order;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,9 @@ public class Player {
 
     public String role;
 
+    @Column(name = "current_overall")
+    public int currentOverall;
+
     @Column(name="current_level")
     public int currentLevel;
 
@@ -33,8 +38,8 @@ public class Player {
     @Column(name="team_status")
     public String teamStatus;
 
-    @Column(name = "in_in_squad_builder")
-    public boolean inInSquadBuilder;
+    @Column(name = "is_in_squad_builder")
+    public boolean isInSquadBuilder;
 
     @ManyToOne()
     public User user;

@@ -82,4 +82,15 @@ public class UserController {
         }
         return (T) user;
     }
+
+    @PostMapping(value="/user/update-user", consumes = MediaType.ALL_VALUE, produces = "application/json")
+    public <T> T addCoins(@RequestBody User updatedUser){
+        User user;
+        try{
+            user = this.userService.updateUser(updatedUser);
+        } catch (Exception ex) {
+            return (T) ex.getMessage();
+        }
+        return (T) user;
+    }
 }

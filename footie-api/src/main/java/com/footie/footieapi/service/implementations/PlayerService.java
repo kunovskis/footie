@@ -6,6 +6,9 @@ import com.footie.footieapi.persistence.PlayerRepository;
 import com.footie.footieapi.persistence.BasePlayerRepository;
 import com.footie.footieapi.service.interfaces.PlayerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,5 +34,11 @@ public class PlayerService implements PlayerInterface {
     public List<Player> getTeam() throws Exception{
         User user = this.userService.getUser();
         return this.playerRepository.getByUser(user);
+    }
+
+    public List<Player> getTeamPagination(int page, int size) throws Exception{
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.DESC, "currentOverall");
+        User user = this.userService.getUser();
+        return this.playerRepository.findByUser(user, pageable);
     }
 }

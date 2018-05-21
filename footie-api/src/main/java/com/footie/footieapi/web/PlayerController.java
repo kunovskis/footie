@@ -28,4 +28,9 @@ public class PlayerController {
     public <T> T getTeam() throws Exception {
         return (T) this.playerService.getTeam();
     }
+
+    @PostMapping(value="/player/team-pagination", consumes = MediaType.ALL_VALUE, produces = "application/json")
+    public <T> T getTeamPagination(@RequestBody int[] pagination) throws Exception {
+        return (T) this.playerService.getTeamPagination(pagination[0], pagination[1]);
+    }
 }

@@ -24,6 +24,7 @@ public class UserService implements UserInterface{
         if(userRepository.findByEmail(newUser.email) != null){
             throw new Exception("Email taken");
         }
+        this.user = newUser;
         userRepository.save(newUser);
      }
 
@@ -71,6 +72,15 @@ public class UserService implements UserInterface{
             throw new Exception("Not signed in");
         }
         this.user.coins += coins;
+        this.userRepository.save(user);
+        return user;
+    }
+
+    public User updateUser(User updatedUser) throws Exception{
+        if(user == null){
+            throw new Exception("Not signed in");
+        }
+        this.user = updatedUser;
         this.userRepository.save(user);
         return user;
     }

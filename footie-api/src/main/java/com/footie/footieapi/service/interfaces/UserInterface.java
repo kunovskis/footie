@@ -15,4 +15,6 @@ public interface UserInterface {
     User updateUserWithTeam() throws Exception;
 
     User addCoins(int coins) throws Exception;
+
+    User updateUser(User updatedUser) throws Exception;
 }
